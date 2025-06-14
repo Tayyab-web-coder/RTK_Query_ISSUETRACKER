@@ -5,38 +5,66 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.issue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+  width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.issue-form input,
+.issue-form textarea {
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
 }
 
-.card {
-  padding: 2em;
+.issue-form input {
+  padding: 0.8rem;
+
 }
 
-.read-the-docs {
-  color: #888;
+.issue-form select {
+  padding: 0.5rem;
+
+}
+
+.issue-form button {
+  padding: 0.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.issue-form button:hover {
+  background-color: #0056b3;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
 }
