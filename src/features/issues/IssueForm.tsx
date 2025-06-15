@@ -38,10 +38,14 @@ export const IssueForm = ({
         submit(data)
         reset();
         })} className="issue-form">
-        <input type="text" placeholder="Enter Title..." {...register('title')} />
+          <div className="title">
+        <input type="text" className={`${errors.title && 'error-Input'}`} placeholder="Enter Title..." {...register('title')} />
         {errors.title && <p className="error">{errors.title.message}</p>}
-        <textarea placeholder="Enter a Description"  {...register('description')}></textarea>
+          </div>
+          <div className="description">
+        <textarea placeholder="Enter a Description" className={`${errors.description && 'error-Input'}`}  {...register('description')}></textarea>
         {errors.description && <p className="error">{errors.description.message}</p>}
+          </div>
         <select {...register('type')}>
           <option value="open">open</option>
           <option value="in-progress">in-progress</option>
@@ -52,7 +56,10 @@ export const IssueForm = ({
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <input type="text" placeholder="Enter a Tags..." {...register('tags')} />
+        <div className="tags">
+        <input type="text" className={`${errors.tags && 'error-Input'}`} placeholder="Enter a Tags..." {...register('tags')} />
+        {errors.tags && <p className="error">{errors.tags.message}</p>}
+        </div>
         <button>{btnText}</button>
       </form>
     </>

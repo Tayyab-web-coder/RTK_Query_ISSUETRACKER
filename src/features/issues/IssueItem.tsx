@@ -48,11 +48,11 @@ export const IssueItem = ({ issue }: { issue: Issue }) => {
         </div>
 
         <div className="issue-actions">
-          <button className="btn update">
           <NavLink to={`/edit/${issue.id}`}>
+          <button className="btn update">
             Update
-          </NavLink>
             </button>
+          </NavLink>
           <button className="btn delete" onClick={handleDelete}>Delete</button>
         </div>
       </div>
