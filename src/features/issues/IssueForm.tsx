@@ -1,35 +1,43 @@
 import { useForm } from "react-hook-form"
 import { issueSchema } from "../../schemas/issueSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useCreateUserIssueMutation } from "../../api/issueApiSlice";
 import { Loader } from "../../components/Loader";
-export const IssueForm = ({ }) => {
-  const [createUserIssue, { isLoading }] = useCreateUserIssueMutation();
-  const { handleSubmit, register, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(issueSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-      type: "open",
-      priority: "Low",
-      tags: ""
-    }
-  })
-  const OnSubmit = (data: any) => {
-    createUserIssue(data);
-    console.log(data);
-    reset({
-      title: '',
-      description: '',
-      type: 'open',
-      priority: 'Low',
-    });
+type IssueFormValues = {
+  title: string;
+  description: string;
+  type: "open" | "in-progress" | "closed";
+  priority: "Low" | "Medium" | "High";
+  tags: string;
+};
 
-  }
+export const IssueForm = ({
+  btnText = 'Submit',
+  issue = {
+    title: "",
+    description: "",
+    type: "open" as "open",
+    priority: "Low" as "Low",
+    tags: ""
+  },
+  submit,
+  loading = false
+}: {
+  btnText?: string;
+  issue?: IssueFormValues;
+  submit: (data: IssueFormValues) => void;
+  loading?: boolean;
+}) => {
+  const { handleSubmit, register, formState: { errors }, reset } = useForm<IssueFormValues>({
+    resolver: yupResolver(issueSchema),
+    defaultValues: issue
+  })
   return (
     <>
-      {isLoading && <Loader />}
-      <form onSubmit={handleSubmit(OnSubmit)} className="issue-form">
+      {loading && <Loader />}
+      <form onSubmit={handleSubmit((data)=>{
+        submit(data)
+        reset();
+        })} className="issue-form">
         <input type="text" placeholder="Enter Title..." {...register('title')} />
         {errors.title && <p className="error">{errors.title.message}</p>}
         <textarea placeholder="Enter a Description"  {...register('description')}></textarea>
@@ -44,8 +52,8 @@ export const IssueForm = ({ }) => {
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        <input type="text" placeholder="Enter a Tags..." />
-        <button>Submit</button>
+        <input type="text" placeholder="Enter a Tags..." {...register('tags')} />
+        <button>{btnText}</button>
       </form>
     </>
   )
